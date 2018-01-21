@@ -1,0 +1,24 @@
+<section id="bookshelf">
+  <div class="container">
+    <h3>{{ .Site.Data.bookshelf.name }}</h3>
+    <div class="panel panel-default">
+      <div class="panel-body">
+      {{ $lastIndex := add (len .Site.Data.bookshelf.source) -1 }}
+      {{ range $i, $el := .Site.Data.bookshelf.source }}
+        <div class="row">
+          <div class="col-md-12">
+            <h4>{{ $el.author }}: {{ $el.title }}</h4>
+            <h5>ISBN: {{ $el.isbn }}{{ if index $el "amazon" }} (<a href="{{ $el.amazon }}">Amazon</a>){{ end }}</h5>
+            <p class="blogpost" style="text-align: justify">
+              {{ $el.comment | markdownify }}
+            </p>
+          </div>
+        </div>
+        {{ if ne $i $lastIndex }}
+        <hr/>
+        {{ end }}
+      {{ end }}
+      </div>
+    </div>
+  </div>
+</section>

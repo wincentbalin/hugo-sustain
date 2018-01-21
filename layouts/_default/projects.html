@@ -6,8 +6,11 @@
       {{ range $i, $el := .Site.Data.projects.source }}
         <h5>
           <i class="{{ .icon }}"></i>&nbsp;&nbsp;
-          <strong><a href="#">Project {{ add $i 1 }}</a></strong>&nbsp;-&nbsp;{{ $el.description }}
+          <strong><a href="{{ .link }}">{{ .name }}</a></strong>
         </h5>
+        <p class="blogpost" style="text-align: justify">
+        {{ $el.description | markdownify }}
+        </p>
       {{ end }}
       </div>
     </div>
