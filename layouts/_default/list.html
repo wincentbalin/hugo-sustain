@@ -4,25 +4,46 @@
       <!-- Header -->
       {{ partial "header" . }}
       <div class="container">
+        {{- $url := replace .Permalink ( printf "%s" .Site.BaseURL) "" -}}
+        {{- if eq $url "blog/archive/" -}}
         <h3>Archive</h3>
+        {{ if .Site.Params.description }}<h4 class="text-muted">{{ .Site.Params.description }}</h4>{{ end }}
           <div class="panel panel-default">
             <div class="panel-body">
-            {{ range .Data.Pages.ByPublishDate }}
+            {{ range (where .Site.RegularPages.ByPublishDate.Reverse "Type" "blog") }}
+            {{ partial "list-entry" . }}
+            {{ end }}
+            </div>
+          </div>
+        {{- else -}}
+        {{ if eq $url "blog/" }}
+        <h3>Blog</h3>
+        {{ if .Site.Params.description }}<h4 class="text-muted">{{ .Site.Params.description }}</h4>{{ end }}
+        {{ end }}
+        {{ if eq .Kind "taxonomy"}}
+        {{ $data := .Data }}
+        <h3>
+          {{- $data.Singular | humanize -}}:
+          <span class="label label-{{- if eq $data.Plural "tags" -}}success{{- else if eq $data.Plural "categories" -}}default{{- else -}}info{{- end -}}">
+          {{ $data.Term }}
+          </span>
+        </h3>
+        {{ end }}
+          <div class="panel panel-default">
+            <div class="panel-body">
+            {{ range first 10 .Data.Pages.ByPublishDate.Reverse }}
+            {{ partial "list-entry" . }}
+            {{ end }}
+            {{ if gt (len .Data.Pages) 10 }}
               <div class="row">
-                <div class="col-sm-4 col-md-4 col-lg-4">
-                  <h5 style="text-align: right">
-                    {{ .Date.Format "January 2, 2006" }}
-                  </h5>
-                 </div>
-                 <div class="col-sm-8 col-md-8 col-lg-8">
-                   <h5 style="text-align: left">
-                    <strong><a href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a></strong>
-                  </h5>
+                <div class="alert alert-info text-center">
+                  <a href="archive/" class="alert-link">Go to the archive to see all articles <i class="fa fa-arrow-right"></i></a>
                 </div>
               </div>
             {{ end }}
             </div>
           </div>
+        {{- end -}}
       </div>
     </div>
     <!-- Footer -->
