@@ -1,7 +1,17 @@
 <footer>
   <div id="footer">
     <div class="container">
-      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+      <p class="text-muted">
+      {{ if .Site.Params.legalnotice }}
+        <a href="{{ .Site.Params.legalnotice }}">
+          {{ if .Site.Params.legalnoticelabel }}
+            {{ .Site.Params.legalnoticelabel }}
+          {{ else }}
+            Legal notice
+          {{ end }}
+        </a>
+      {{ end }}
+      &copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
       <a href="http://www.github.com/nurlansu/hugo-sustain/">sustain</a> with ♥</p>
     </div>
   </div>
