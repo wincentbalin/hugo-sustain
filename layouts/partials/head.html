@@ -4,17 +4,25 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="{{ .Site.Author }}" />
+    <meta name="author" content="{{ .Site.Params.Author }}" />
     {{ if .Site.Params.description }}<meta name="description" content="{{ .Site.Params.description }}">{{ end }}
     <link rel="shortcut icon" type="image/x-icon" href="{{ .Site.BaseURL }}img/favicon.ico">
     <title>
     {{- $url := replace .Permalink ( printf "%s" .Site.BaseURL) "" -}}
     {{- if eq $url "/" -}}
         {{- .Site.Title -}}
+    {{- else if eq $url "blog/" -}}
+        Blog{{ if .Site.Params.description }} &middot; {{ .Site.Params.description }}{{ end }}
+    {{- else if eq $url "blog/archive/" -}}
+        Archive{{ if .Site.Params.description }} &middot; {{ .Site.Params.description }}{{ end }}
     {{- else -}}
         {{- if .Params.heading -}} {{- .Params.heading -}} {{- else -}} {{- .Title -}} {{- end -}}
+        {{ if .Site.Params.description }} &middot; {{ .Site.Params.description }}{{ end }}
     {{- end -}}
 	</title>
+    {{- if eq $url "blog/" -}}
+    <link href="{{ .RSSLink }}" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
+    {{- end -}}
     {{ .Hugo.Generator }}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ .Site.BaseURL }}css/main.css" />
