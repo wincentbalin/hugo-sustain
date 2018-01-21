@@ -1,0 +1,25 @@
+{{ partial "head" . }}
+  <body>
+    <div id="wrap">
+      {{ partial "header" . }}
+      <div class="container">
+        <h3 id="title">{{ .Title }}</h3>
+        <div class="row">
+        <h4>
+        {{ $baseurl := .Site.BaseURL }}
+        {{ $data := .Data }}
+        {{ range $key, $value := $data.Terms }}
+        <a href="{{ $baseurl }}{{ $data.Plural }}/{{ $key | urlize }}">
+          <span class="label {{ if eq $data.Plural "tags" }}label-success{{ else if eq $data.Plural "categories" }}label-default{{ else }}label-info{{ end }} topic">
+            {{ $key }}
+            <span class="badge">{{ len $value }}</span>
+          </span>
+        </a>
+        {{ end }}
+        </h4>
+        </div>
+      </div>
+    </div>
+    {{ partial "footer" . }}
+  </body>
+</html>
