@@ -90,6 +90,8 @@ To add Google Analytics, simply sign up to [Google Analytics][g-analytics] to ob
 
 This is a port of the Jekyll theme [Sustain][sustain-jekyll] by [Fábio Madeira][sustain-author]. It supports most of the features of the original theme.
 
+Some more additions by [Wincent Balin][sustain-contributor].
+
 ## Contributing
 
 Pull requests, bug fixes, and new features are welcome!
@@ -132,3 +134,4 @@ Pull requests, bug fixes, and new features are welcome!
 [g-analytics]: https://www.google.com/analytics/
 [sustain-jekyll]: https://github.com/biomadeira/sustain/
 [sustain-author]: https://github.com/biomadeira/
+[sustain-contributor]: https://github.com/wincentbalin/
