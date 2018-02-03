@@ -31,15 +31,21 @@
         {{ end }}
           <div class="panel panel-default">
             <div class="panel-body">
-            {{ range first 10 .Data.Pages.ByPublishDate.Reverse }}
-            {{ partial "list-entry" . }}
-            {{ end }}
-            {{ if gt (len .Data.Pages) 10 }}
+            {{ if eq .Kind "taxonomy" }}
+              {{ range first 10 .Data.Pages.ByPublishDate.Reverse }}
+              {{ partial "list-entry" . }}
+              {{ end }}
+            {{ else }}
+              {{ range first 10 .Data.Pages.ByPublishDate.Reverse }}
+              {{ partial "list-entry" . }}
+              {{ end }}
+              {{ if gt (len .Data.Pages) 10 }}
               <div class="row">
                 <div class="alert alert-info text-center">
                   <a href="archive/" class="alert-link">Go to the archive to see all articles <i class="fa fa-arrow-right"></i></a>
                 </div>
               </div>
+              {{ end }}
             {{ end }}
             </div>
           </div>
