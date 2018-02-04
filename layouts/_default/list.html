@@ -32,7 +32,7 @@
           <div class="panel panel-default">
             <div class="panel-body">
             {{ if eq .Kind "taxonomy" }}
-              {{ range first 10 .Data.Pages.ByPublishDate.Reverse }}
+              {{ range .Data.Pages.ByPublishDate.Reverse }}
               {{ partial "list-entry" . }}
               {{ end }}
             {{ else }}
