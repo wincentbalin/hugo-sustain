@@ -208,3 +208,8 @@ div.footer{
 a > i.fa {
     color: #000
 }
+
+/* Tag lines should not overlap. */
+div.blog-subtitle > h4 {
+    line-height: 200%
+}
